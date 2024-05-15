@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace等于mapper接口类的全限定名,这样实现对应 -->
+<mapper namespace="com.liuyun.mapper.UserMapper">
+    <update id="updateUser">
+        update user set avatar=#{avatar},
+        password=#{password},
+        nick_name=#{nickName},
+        use_space=#{useSpace},
+        total_space=#{totalSpace}
+        where user_name=#{userName};
+    </update>
+
+    <select id="queryAllUsers" resultType="user">
+        select * from user
+    </select>
+
+    <select id="queryByUserName" resultType="user">
+        select * from user where user_name=#{userName}
+    </select>
+    <select id="getUseSpaceByUserName" resultType="java.lang.Integer">
+        select sum(file_size)
+        from file
+        where user_name=#{userName}
+    </select>
+
+    <insert id="register">
+        insert into user (user_name,nick_name,email,password) values(#{userName},#{userName},#{email},#{password})
+    </insert>
+    <delete id="delete">
+        delete from user where user_name=#{userName}
+    </delete>
+</mapper>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace等于mapper接口类的全限定名,这样实现对应 -->
+<mapper namespace="com.liuyun.mapper.MyFileMapper">
+
+    <insert id="saveFile" >
+        insert into file(file_id,file_copy,user_name,file_pid,file_name,file_new_name,file_path,file_type,file_category,file_size,create_time,is_folder,status)
+        values(#{fileId},#{fileCopy},#{userName},#{filePid},#{fileName},#{fileNewName},#{filePath},#{fileType},#{fileCategory},#{fileSize},#{createTime},#{isFolder},#{status})
+    </insert>
+
+    <select id="getFiles" resultType="MyFile">
+        select * from file where file_pid=#{fileId} and user_name=#{userName} and status=1
+        ORDER BY file_id DESC
+        LIMIT 20
+    </select>
+    <select id="getFilesByCategory" resultType="com.liuyun.pojo.MyFile">
+        select * from file where file_category=#{fileCategory} and user_name=#{userName} and is_folder=0 and status=1
+        ORDER BY file_id DESC
+        LIMIT 20
+    </select>
+    <select id="queryCopy" resultType="myFile">
+        select * from file where file_new_name=#{fileNewName} and user_name=#{userName} and file_pid=#{filePid} and status=1
+        limit 1
+    </select>
+    <select id="queryById" resultType="MyFile">
+        select * from file where file_id=#{fileId}
+    </select>
+    <select id="queryByPid" resultType="MyFile">
+        select * from file where file_pid=#{filePid}
+    </select>
+    <select id="queryByNewName" resultType="com.liuyun.pojo.MyFile">
+        select * from file where file_new_name=#{fileNewName}
+    </select>
+    <select id="querySameNameInSamePath" resultType="MyFile">
+        select * from file where file_name=#{fileName} and file_pid=#{filePid}
+        order by file_copy desc
+        limit 1
+    </select>
+    <select id="getFolders" resultType="com.liuyun.pojo.MyFile">
+        select * from file where file_pid=#{fileId} and user_name=#{userName} and is_folder=1 and status=1
+        ORDER BY file_id DESC
+    </select>
+    <select id="getBin" resultType="com.liuyun.pojo.MyFile">
+        select * from file where file_pid=#{fileId} and user_name=#{userName} and status=0
+    </select>
+    <select id="getRecent" resultType="com.liuyun.pojo.MyFile">
+        select * from file where user_name=#{userName} and status=1
+        ORDER BY create_time DESC
+        limit 20
+    </select>
+
+    <update id="updateFile">
+        update file set file_pid=#{filePid},file_name=#{fileName},file_new_name=#{fileNewName},
+        access_code=#{accessCode},file_copy=#{fileCopy},last_update_time=#{lastUpdateTime},status=#{status}
+        where file_id=#{fileId}
+    </update>
+    <update id="updateFilePid">
+        update file set file_pid=#{filePid}
+        where file_id=#{fileId}
+    </update>
+
+    <delete id="deleteFile">
+        delete from file where file_id=#{fileId}
+    </delete>
+</mapper>
