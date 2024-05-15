@@ -1,0 +1,110 @@
+@font-face {
+    font-family: 'deyihei'; /* 自定义字体名称 */
+    src: url('../fonts/Smiley_Sans_Oblique.woff') format('woff') ; /* 字体文件路径 */
+  }
+  
+  *{
+    border: none;
+    margin: 0;
+   
+  }
+  .body{
+    
+      width: 100%;
+      position: absolute;
+      background-size: cover;
+      left: 0;
+      top: 0;
+      display: flex;
+      height: 100vh;
+      
+  }
+  #logo{
+    display: flex;
+  }
+  .el-header{
+    box-shadow : 2px 0 15px rgba(174, 174, 174, 0.35);
+    height: 70px;
+    z-index: 99;
+    display: flex;
+    align-items: center;
+  }
+  .aside{
+    min-height:100vh;
+    background-color: #001529;
+    box-shadow : 2px 0 10px rgba(79, 79, 79, 0.35);
+    transition: width .3s;
+    z-index: 100;
+  }
+  
+  #logo{
+    height:60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+  
+  }
+  .el-menu{
+    --el-menu-bg-color:#001529;
+    --el-menu-text-color:rgba(255,255,255,0.65);
+    --el-menu-hover-bg-color:#002c55;
+    margin: 6px;
+    border: none; 
+  }
+  
+  
+  .el-menu-item:hover {
+    --el-menu-text-color:#1197fe ;
+    border-radius: 9px;
+  }
+  
+  .el-menu-item.is-active {
+    background-color: #1997fe;
+    color: #ffffff ;
+    border-radius: 9px;
+  }
+  
+  
+  .el-icon:hover{
+    color: #1197fe;
+  }
+  .user{
+    width: 100%;
+    
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+    span.user-id{
+        padding-left:1vw ;
+        margin-right: 1vw;
+        font-weight: 550;
+        font-size: 20px;
+        color: #000;
+        cursor: pointer;
+       
+    }
+    img{
+        cursor: pointer;
+        
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+       
+    }
+    .dropdown-btn{
+        height: 100%;
+        background: none;
+        border: none;
+        &:hover .user-id{
+            color: #1997fe;
+        }
+        &:focus-visible{
+            outline: none;
+        }
+    }
+  }
+  
+ 
+  
